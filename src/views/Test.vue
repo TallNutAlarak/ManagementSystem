@@ -9,16 +9,4 @@
 </template>
 
 <script>
-import todo from "../components/Todo";
-import transitionTest from "../components/transitionTest";
-import filterTest from "../components/filter";
-import ajaxTest from "../components/ajaxTest.vue";
-export default {
-  components: {
-    todo,
-    transitionTest,
-    filterTest,
-    ajaxTest
-  }
-};
 </script>

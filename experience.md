@@ -54,3 +54,5 @@ watch如果要监测对象中的数据变化需要使用deep
 发布:
 `PubSub.publish('消息名称',data)`
 
+
+
