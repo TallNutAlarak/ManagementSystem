@@ -1,25 +1,60 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-
-
+import Login from "../views/login/index.vue"
+import Layout from "@/components/layout.vue"
+import Home from "@/views/home"
+import Member from "@/views/member"
+import Supplier from "@/views/supplier"
+import Goods from "@/views/goods"
+import Staff from "@/views/staff"
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: '/login',
+    name: 'login',
+    component: Login
   },
   {
-    path: "/test",
-    name: "Test",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ "../views/Test.vue")
+    path: '/',
+    name: 'layout',
+    component: Layout,
+    redirect:'/home',
+    children:[
+      {
+        path: '/home',
+        name: 'home',
+        component: Home,
+        meta:{title:'首页'}
+    },
+    {
+      path: '/member',
+      name: 'member',
+      component: Member,
+      meta:{title:'会员管理'}
+    },  
+    {
+      path: '/supplier',
+      name: 'supplier',
+      component: Supplier,
+      meta:{title:'供应商管理'}
+    },  
+    {
+      path: '/goods',
+      name: 'goods',
+      component: Goods,
+      meta:{title:'商品管理'}
+    },  
+    {
+      path: '/staff',
+      name: 'staff',
+      component: Staff,
+      meta:{title:'员工管理'}
+    },  
+  ]
   },
   
+
 ];
 
 const router = new VueRouter({

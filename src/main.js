@@ -4,13 +4,14 @@ import 'element-ui/lib/theme-chalk/index.css';
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import "./router/pemission.js";
+import "@/mockjs/login-mock";
+import "@/mockjs/member-mock";
 
 // 使用组件库
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
-
-console.log(111,process.env.VUE_APP_SERVICE_URL)
 
 new Vue({
   router,
