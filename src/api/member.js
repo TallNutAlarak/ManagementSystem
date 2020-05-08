@@ -6,5 +6,19 @@ export default {
             url:'/member/list',
             method:'get'
         })
+    },
+    search(page,size,searchMap){
+        return request({
+            url:`/member/list/search/${page}/${size}`,
+            method:'post',
+            data:searchMap
+        })
+    },
+    add(pojo){
+        return request({
+            url:'/member',
+            method:'post',
+            data:pojo
+        })
     }
 }
