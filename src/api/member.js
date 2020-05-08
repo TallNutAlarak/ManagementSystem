@@ -20,5 +20,24 @@ export default {
             method:'post',
             data:pojo
         })
+    },
+    getByID(id){
+        return request({
+            url:`/member/${id}`,
+            method:'get'
+        })
+    },
+    update(pojo){
+        return request({
+            url:`/member/${pojo.id}`,
+            method:'put',
+            data:pojo
+        })
+    },
+    deleteById(id){
+        return request({
+            url:`/member/${id}`,
+            method:'delete'
+        })
     }
 }

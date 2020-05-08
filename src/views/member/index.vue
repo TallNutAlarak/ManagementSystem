@@ -49,7 +49,7 @@
             <el-form-item>
                 <el-button
                     type="primary"
-                    @click="dialogFormVisible = true"
+                    @click="handleAdd"
                 >新增</el-button>
             </el-form-item>
             <el-form-item>
@@ -166,7 +166,10 @@
                         autocomplete="off"
                     ></el-input>
                 </el-form-item>
-                <el-form-item label="会员生日">
+                <el-form-item
+                    label="会员生日"
+                    prop="birthday"
+                >
                     <el-date-picker
                         v-model="pojo.birthday"
                         value-format="yyyy-MM-dd"
@@ -175,19 +178,28 @@
                     >
                     </el-date-picker>
                 </el-form-item>
-                <el-form-item label="手机号码">
+                <el-form-item
+                    label="手机号码"
+                    prop="phone"
+                >
                     <el-input
                         v-model="pojo.phone"
                         autocomplete="off"
                     ></el-input>
                 </el-form-item>
-                <el-form-item label="开卡金额">
+                <el-form-item
+                    label="开卡金额"
+                    prop="money"
+                >
                     <el-input
                         v-model="pojo.money"
                         autocomplete="off"
                     ></el-input>
                 </el-form-item>
-                <el-form-item label="可用积分">
+                <el-form-item
+                    label="可用积分"
+                    prop="integral"
+                >
                     <el-input
                         v-model="pojo.integral"
                         autocomplete="off"
@@ -224,7 +236,7 @@
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
                 <el-button
                     type="primary"
-                    @click="addData('pojoForm')"
+                    @click="pojo.id === null ? addData('pojoForm') : updateData('pojoForm')"
                 >确 定</el-button>
             </div>
         </el-dialog>
@@ -255,7 +267,16 @@ export default {
             // 控制对话框
             dialogFormVisible: false,
             // 提交的数据
-            pojo: {},
+            pojo: {
+                cardNum: "",
+                name: "",
+                birthday: "",
+                phone: "",
+                money: 0,
+                integral: 0,
+                payType: "",
+                address: ""
+            },
             rules: {
                 cardNum: [
                     { required: true, message: "卡号不能为空", trigger: "blur" }
@@ -296,11 +317,68 @@ export default {
                     this.total = resp.data.total;
                 });
         },
+        updateData(formName) {
+            this.$refs[formName].validate(valid => {
+                if (valid) {
+                    memberApi.update(this.pojo).then(res => {
+                        const resp = res.data;
+                        if (resp.flag) {
+                            this.fetchData();
+                            this.dialogFormVisible = false;
+                        } else {
+                            this.$message({
+                                message: resp.message,
+                                type: "warning"
+                            });
+                        }
+                    });
+                }
+            });
+        },
+        handleAdd() {
+            this.dialogFormVisible = true;
+            this.$nextTick(() => {
+                // this.$nextTick()是一个异步事件，当渲染结束后，回调函数执行
+                // 弹出窗口打开之后，需要加载Dom，需要花费一点时间，等待它加载完dom之后再进行调用resetFiles方法，重置表单和清除
+                this.$refs["pojoForm"].resetFields();
+            });
+        },
         handleEdit(id) {
-            console.log(id);
+            this.handleAdd();
+            memberApi.getByID(id).then(res => {
+                const resp = res.data;
+                console.log(resp);
+                if (resp.flag) {
+                    console.log(resp.data);
+                    this.pojo = resp.data;
+                }
+            });
         },
         handleDelete(id) {
             console.log(id);
+            this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            })
+                .then(() => {
+                    memberApi.deleteById(id).then(res => {
+                        const resp = res.data;
+                        this.$message({
+                            type: resp.flag ? "success" : "error",
+                            message: resp.message
+                        });
+                        if (resp.flag) {
+                            this.fetchData();
+                        }
+                    });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除"
+                    });
+                });
         },
         resetForm(formName) {
             this.$refs[formName].resetFields();
