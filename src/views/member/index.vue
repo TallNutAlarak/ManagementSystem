@@ -55,7 +55,6 @@
             <el-form-item>
                 <el-button @click="resetForm('searchForm')">重置</el-button>
             </el-form-item>
-
         </el-form>
 
         <el-table
@@ -100,7 +99,7 @@
             >
                 <template slot-scope="scope">
                     <span>
-                        {{scope.row.payType | payTypeFilter}}
+                        {{ scope.row.payType | payTypeFilter }}
                     </span>
                 </template>
             </el-table-column>
@@ -236,7 +235,9 @@
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
                 <el-button
                     type="primary"
-                    @click="pojo.id === null ? addData('pojoForm') : updateData('pojoForm')"
+                    @click="
+            pojo.id === null ? addData('pojoForm') : updateData('pojoForm')
+          "
                 >确 定</el-button>
             </div>
         </el-dialog>

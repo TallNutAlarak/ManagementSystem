@@ -1,30 +1,28 @@
 <template>
-    <div>
-        <app-header></app-header>
-        <app-main></app-main>
-        <app-navbar></app-navbar>
-        
-        
-    </div>
+  <div>
+    <app-header></app-header>
+    <app-main></app-main>
+    <app-navbar></app-navbar>
+  </div>
 </template>
 
 <script>
-import AppHeader from './AppHeader'
-import AppMain from './AppMain'
-import AppNavbar from './AppNavbar'
+import AppHeader from "./AppHeader";
+import AppMain from "./AppMain";
+import AppNavbar from "./AppNavbar";
 export default {
-    data() {
-        return {};
-    },
-    components:{
-        AppHeader,
-        AppMain,
-        AppNavbar
-    }
+  data() {
+    return {};
+  },
+  components: {
+    AppHeader,
+    AppMain,
+    AppNavbar
+  }
 };
 </script>
 
-<style lang='stylus'>
+<style lang="stylus">
 .header {
     position: absolute;
     line-height: 50px;

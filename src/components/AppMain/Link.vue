@@ -1,16 +1,11 @@
 <template>
-    <div>
-        <el-breadcrumb
-            separator-class="el-icon-arrow-right"
-        >
-            <el-breadcrumb-item
-                class="line"
-                :to="{ path:$route.path }"
-            >
-                {{$route.meta.title}}
-            </el-breadcrumb-item>
-        </el-breadcrumb>
-    </div>
+  <div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item class="line" :to="{ path: $route.path }">
+        {{ $route.meta.title }}
+      </el-breadcrumb-item>
+    </el-breadcrumb>
+  </div>
 </template>
 <style lang="stylus" scoped>
 .el-breadcrumb {
