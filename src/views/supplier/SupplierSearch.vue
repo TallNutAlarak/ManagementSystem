@@ -13,14 +13,14 @@
                 ></el-input>
             </el-form-item>
 
-            <el-form-item prop="linkman">
+            <el-form-item prop="linkman" v-if="!isDialog">
                 <el-input
                     v-model="searchMap.linkman"
                     placeholder="联系人"
                 ></el-input>
             </el-form-item>
 
-            <el-form-item prop="mobile">
+            <el-form-item prop="mobile" v-if="!isDialog">
                 <el-input
                     v-model="searchMap.mobile"
                     placeholder="联系电话"
@@ -33,13 +33,13 @@
                     @click="$emit('fetchdata')"
                 >查询</el-button>
             </el-form-item>
-            <el-form-item>
+            <el-form-item v-if="!isDialog">
                 <el-button
                     type="primary"
                     @click="handleAdd"
                 >新增</el-button>
             </el-form-item>
-            <el-form-item>
+            <el-form-item v-if="!isDialog">
                 <el-button @click="resetForm('searchForm')">重置</el-button>
             </el-form-item>
         </el-form>
@@ -55,7 +55,8 @@ export default {
         searchMap: {
             type: Object,
             required: true
-        }
+        },
+        isDialog:Boolean
     },
     methods: {
         resetForm(formName) {

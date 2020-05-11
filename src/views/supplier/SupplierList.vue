@@ -5,6 +5,8 @@
             height="380"
             border
             style="width: 100%"
+            :highlight-current-row = "isDialog"
+            @current-change = "handleCurrentChange"
         >
             <el-table-column
                 type="index"
@@ -23,14 +25,17 @@
             <el-table-column
                 prop="mobile"
                 label="联系电话"
+                v-if="!isDialog"
             ></el-table-column>
             <el-table-column
                 prop="remark"
                 label="备注"
+                v-if="!isDialog"
             ></el-table-column>
             <el-table-column
                 label="操作"
                 width="150"
+                v-if="!isDialog"
             >
                 <template slot-scope="scope">
                     <el-button
@@ -55,7 +60,8 @@ export default {
         supplierList: {
             type: Array,
             required: true
-        }
+        },
+        isDialog:Boolean,
     },
     methods: {
         handleEdit(id) {
@@ -88,6 +94,10 @@ export default {
                     }
                 })
             ]);
+        },
+        // 点击某一行时调用
+        handleCurrentChange(currentRow){
+            this.$emit('option-supplier',currentRow)
         }
     }
 };

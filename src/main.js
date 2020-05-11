@@ -8,6 +8,7 @@ import "./router/pemission.js";
 import "@/mockjs/login-mock";
 import "@/mockjs/member-mock";
 import "@/mockjs/supplier-mock";
+import "@/mockjs/goods-mock";
 
 // 使用组件库
 Vue.use(ElementUI);

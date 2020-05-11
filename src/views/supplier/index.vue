@@ -6,11 +6,14 @@
             @TogglePopupShow="TogglePopupShow"
             @getRef="getRef"
             @openPopup="openPopup"
+            :isDialog="isDialog"
         ></supplier-search>
         <supplier-list
             :supplierList="list"
             @openPopup="openPopup"
             @fetchdata="fetchdata"
+            :isDialog="isDialog"
+            @option-supplier = "optionSupplier"
         ></supplier-list>
         <supplier-paging
             :currentPage="currentPage"
@@ -19,12 +22,14 @@
             @fetchdata="fetchdata"
             @pageChange="pageChange"
             @pageSizeChange="pageSizeChange"
+            :isDialog="isDialog"
         ></supplier-paging>
         <supplier-popup
             :dialogFormVisible="dialogFormVisible"
             @TogglePopupShow="TogglePopupShow"
             @getPopupRef="getPopupRef"
             @fetchdata="fetchdata"
+            v-if="isDialog"
         ></supplier-popup>
     </div>
 </template>
@@ -51,6 +56,10 @@ export default {
             dialogFormVisible: false,
             popupRef: {}
         };
+    },
+    props:{
+        // 接收是否为弹框
+        isDialog:Boolean
     },
     created() {
         this.fetchdata();
@@ -94,6 +103,9 @@ export default {
                     this.popupRef.resetFields();
                 });
             }, 100);
+        },
+        optionSupplier(currentRow){
+            this.$emit('option-supplier',currentRow)
         }
     }
 };
