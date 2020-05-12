@@ -348,7 +348,6 @@ export default {
             this.handleAdd();
             memberApi.getByID(id).then(res => {
                 const resp = res.data;
-                console.log(resp);
                 if (resp.flag) {
                     console.log(resp.data);
                     this.pojo = resp.data;
@@ -356,7 +355,6 @@ export default {
             });
         },
         handleDelete(id) {
-            console.log(id);
             this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
                 confirmButtonText: "确定",
                 cancelButtonText: "取消",
@@ -394,7 +392,7 @@ export default {
                             // 关闭成功
                             this.dialogFormVisible = false;
                         } else {
-                            this.message({
+                            this.$message({
                                 message: resp.message,
                                 type: "warning"
                             });
