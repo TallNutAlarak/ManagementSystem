@@ -10,6 +10,7 @@ import "@/mockjs/member-mock";
 import "@/mockjs/supplier-mock";
 import "@/mockjs/goods-mock";
 import "@/mockjs/staff-mock";
+import "@/mockjs/password-mock";
 
 // 使用组件库
 Vue.use(ElementUI);
